@@ -134,16 +134,17 @@ export default function ProductManager({ onBack }: ProductManagerProps) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
           {filteredProducts.length === 0 ? (
-            <div className="col-span-full text-center py-8 md:py-12">
+            <div className="col-span-full text-center py-8 md:py-12 animate-fade-in">
               <p className="text-lg md:text-xl text-slate-500">
                 {searchProduct ? 'Nenhum produto encontrado' : 'Nenhum produto cadastrado'}
               </p>
             </div>
           ) : (
-            filteredProducts.map(product => (
+            filteredProducts.map((product, index) => (
               <div
                 key={product.id}
-                className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-6 shadow-xl border-4 border-slate-200"
+                className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-6 shadow-xl border-4 border-slate-200 card-hover animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.05}s` }}
               >
                 <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-slate-800 mb-2 sm:mb-3 md:mb-4 truncate">{product.name}</h3>
                 <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-green-600 mb-3 sm:mb-4 md:mb-6">
@@ -171,8 +172,8 @@ export default function ProductManager({ onBack }: ProductManagerProps) {
         </div>
 
         {showModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50">
-            <div className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-8 max-w-md w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50 animate-modal-backdrop">
+            <div className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-8 max-w-md w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto animate-modal-content">
               <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-800 mb-3 sm:mb-4 md:mb-6">
                 {editingProduct ? 'Editar Produto' : 'Novo Produto'}
               </h2>
