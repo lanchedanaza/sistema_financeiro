@@ -205,15 +205,16 @@ export default function SalesView({ onBack }: SalesViewProps) {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-3 lg:gap-4">
           {filteredProducts.length === 0 ? (
-            <div className="col-span-full text-center py-8 md:py-12">
+            <div className="col-span-full text-center py-8 md:py-12 animate-fade-in">
               <p className="text-lg md:text-xl text-slate-500">Nenhum produto encontrado</p>
             </div>
           ) : (
-            filteredProducts.map(product => (
+            filteredProducts.map((product, index) => (
               <button
                 key={product.id}
                 onClick={() => handleProductClick(product)}
-                className="bg-white hover:bg-slate-50 rounded-xl md:rounded-2xl lg:rounded-3xl p-3 md:p-4 lg:p-6 shadow-lg hover:shadow-xl border-2 md:border-4 border-slate-200 transform transition hover:scale-105 active:scale-95"
+                className="bg-white hover:bg-slate-50 rounded-xl md:rounded-2xl lg:rounded-3xl p-3 md:p-4 lg:p-6 shadow-lg hover:shadow-xl border-2 md:border-4 border-slate-200 transform transition-all duration-300 ease-out hover:scale-105 active:scale-95 card-hover animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.03}s` }}
               >
                 <ShoppingCart className="w-6 h-6 md:w-8 md:h-10 lg:w-12 lg:h-14 mx-auto mb-2 md:mb-3 text-blue-500" strokeWidth={2.5} />
                 <h3 className="text-sm md:text-base lg:text-lg xl:text-xl font-bold text-slate-800 mb-1 md:mb-2 line-clamp-2">{product.name}</h3>
@@ -226,8 +227,8 @@ export default function SalesView({ onBack }: SalesViewProps) {
         </div>
 
         {showPaymentModal && selectedProduct && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50">
-            <div className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 max-w-md w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50 animate-modal-backdrop">
+            <div className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 max-w-md w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto animate-modal-content">
               <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-800 mb-3 sm:mb-4 md:mb-6 text-center line-clamp-2">
                 {selectedProduct.name}
               </h2>
@@ -337,8 +338,8 @@ export default function SalesView({ onBack }: SalesViewProps) {
         )}
 
         {showClientModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50">
-            <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50 animate-modal-backdrop">
+            <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto animate-modal-content">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-800 mb-4 md:mb-6 text-center">
                 {selectedProduct ? 'Selecione o Cliente' : 'Cliente (Opcional)'}
               </h2>
