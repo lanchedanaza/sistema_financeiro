@@ -226,81 +226,81 @@ export default function SalesView({ onBack }: SalesViewProps) {
         </div>
 
         {showPaymentModal && selectedProduct && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50">
-            <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto">
-              <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-800 mb-4 md:mb-6 text-center">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50">
+            <div className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 max-w-md w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto">
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-800 mb-3 sm:mb-4 md:mb-6 text-center line-clamp-2">
                 {selectedProduct.name}
               </h2>
 
-              <div className="mb-4 md:mb-6 lg:mb-8">
-                <p className="text-lg md:text-xl lg:text-2xl text-slate-600 mb-2 md:mb-3 lg:mb-4 text-center">Quantidade</p>
-                <div className="flex items-center justify-center gap-3 md:gap-4 lg:gap-6">
+              <div className="mb-3 sm:mb-4 md:mb-6 lg:mb-8">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-slate-600 mb-2 sm:mb-3 text-center">Quantidade</p>
+                <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-6">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="bg-red-500 hover:bg-red-600 text-white rounded-xl md:rounded-2xl p-2.5 md:p-3 lg:p-4 transition transform hover:scale-110"
+                    className="bg-red-500 hover:bg-red-600 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-2.5 md:p-3 lg:p-4 transition transform active:scale-95"
                   >
-                    <Minus className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8" strokeWidth={3} />
+                    <Minus className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8" strokeWidth={3} />
                   </button>
-                  <span className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-800 w-16 md:w-20 lg:w-28 text-center">
+                  <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-800 w-12 sm:w-16 md:w-20 lg:w-28 text-center">
                     {quantity}
                   </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="bg-green-500 hover:bg-green-600 text-white rounded-xl md:rounded-2xl p-2.5 md:p-3 lg:p-4 transition transform hover:scale-110"
+                    className="bg-green-500 hover:bg-green-600 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-2.5 md:p-3 lg:p-4 transition transform active:scale-95"
                   >
-                    <Plus className="w-5 h-5 md:w-6 md:h-6 lg:w-8 lg:h-8" strokeWidth={3} />
+                    <Plus className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-8 lg:h-8" strokeWidth={3} />
                   </button>
                 </div>
               </div>
 
-              <div className="bg-slate-100 rounded-xl md:rounded-2xl p-3 md:p-4 lg:p-6 mb-4 md:mb-6 lg:mb-8">
-                <p className="text-lg md:text-xl lg:text-2xl text-slate-600 mb-2 text-center">Total</p>
-                <p className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-green-600 text-center">
+              <div className="bg-slate-100 rounded-lg sm:rounded-xl md:rounded-2xl p-2.5 sm:p-3 md:p-4 lg:p-6 mb-3 sm:mb-4 md:mb-6 lg:mb-8">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-slate-600 mb-1 sm:mb-2 text-center">Total</p>
+                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-green-600 text-center">
                   R$ {(selectedProduct.price * quantity).toFixed(2)}
                 </p>
               </div>
 
-              <div className="mb-4 md:mb-6 lg:mb-8">
-                <label className="block text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-slate-700 mb-2 md:mb-3 lg:mb-4 text-center">
+              <div className="mb-3 sm:mb-4 md:mb-6 lg:mb-8">
+                <label className="block text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-semibold text-slate-700 mb-2 sm:mb-3 text-center">
                   Meio de Pagamento
                 </label>
-                <div className="grid grid-cols-2 gap-2 md:gap-3 lg:gap-4">
+                <div className="grid grid-cols-2 gap-1.5 sm:gap-2 md:gap-3 lg:gap-4">
                   <button
                     onClick={() => setPaymentMethod('dinheiro')}
-                    className={`p-3 md:p-4 lg:p-5 rounded-xl md:rounded-2xl font-bold text-sm md:text-base lg:text-lg xl:text-xl transition ${
+                    className={`p-2 sm:p-2.5 md:p-3 lg:p-4 xl:p-5 rounded-lg sm:rounded-xl md:rounded-2xl font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl transition ${
                       paymentMethod === 'dinheiro'
                         ? 'bg-green-500 text-white shadow-lg'
-                        : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+                        : 'bg-slate-200 text-slate-700 active:bg-slate-300'
                     }`}
                   >
                     💵 Dinheiro
                   </button>
                   <button
                     onClick={() => setPaymentMethod('pix')}
-                    className={`p-3 md:p-4 lg:p-5 rounded-xl md:rounded-2xl font-bold text-sm md:text-base lg:text-lg xl:text-xl transition ${
+                    className={`p-2 sm:p-2.5 md:p-3 lg:p-4 xl:p-5 rounded-lg sm:rounded-xl md:rounded-2xl font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl transition ${
                       paymentMethod === 'pix'
                         ? 'bg-green-500 text-white shadow-lg'
-                        : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+                        : 'bg-slate-200 text-slate-700 active:bg-slate-300'
                     }`}
                   >
                     📱 PIX
                   </button>
                   <button
                     onClick={() => setPaymentMethod('cartao_debito')}
-                    className={`p-3 md:p-4 lg:p-5 rounded-xl md:rounded-2xl font-bold text-sm md:text-base lg:text-lg xl:text-xl transition ${
+                    className={`p-2 sm:p-2.5 md:p-3 lg:p-4 xl:p-5 rounded-lg sm:rounded-xl md:rounded-2xl font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl transition ${
                       paymentMethod === 'cartao_debito'
                         ? 'bg-green-500 text-white shadow-lg'
-                        : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+                        : 'bg-slate-200 text-slate-700 active:bg-slate-300'
                     }`}
                   >
                     💳 Débito
                   </button>
                   <button
                     onClick={() => setPaymentMethod('cartao_credito')}
-                    className={`p-3 md:p-4 lg:p-5 rounded-xl md:rounded-2xl font-bold text-sm md:text-base lg:text-lg xl:text-xl transition ${
+                    className={`p-2 sm:p-2.5 md:p-3 lg:p-4 xl:p-5 rounded-lg sm:rounded-xl md:rounded-2xl font-bold text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl transition ${
                       paymentMethod === 'cartao_credito'
                         ? 'bg-green-500 text-white shadow-lg'
-                        : 'bg-slate-200 text-slate-700 hover:bg-slate-300'
+                        : 'bg-slate-200 text-slate-700 active:bg-slate-300'
                     }`}
                   >
                     💳 Crédito
@@ -308,16 +308,16 @@ export default function SalesView({ onBack }: SalesViewProps) {
                 </div>
               </div>
 
-              <div className="space-y-2 md:space-y-3 lg:space-y-4">
+              <div className="space-y-2 sm:space-y-2.5 md:space-y-3 lg:space-y-4">
                 <button
                   onClick={handlePaid}
-                  className="w-full bg-green-500 hover:bg-green-600 text-white rounded-xl md:rounded-2xl p-3 md:p-4 lg:p-5 xl:p-6 text-base md:text-lg lg:text-xl xl:text-2xl font-bold transition transform hover:scale-105"
+                  className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2.5 sm:p-3 md:p-4 lg:p-5 xl:p-6 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold transition transform active:scale-95"
                 >
                   PAGOU AGORA
                 </button>
                 <button
                   onClick={handleDebt}
-                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl md:rounded-2xl p-3 md:p-4 lg:p-5 xl:p-6 text-base md:text-lg lg:text-xl xl:text-2xl font-bold transition transform hover:scale-105"
+                  className="w-full bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2.5 sm:p-3 md:p-4 lg:p-5 xl:p-6 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-bold transition transform active:scale-95"
                 >
                   ANOTAR / FIADO
                 </button>
@@ -327,7 +327,7 @@ export default function SalesView({ onBack }: SalesViewProps) {
                     setSelectedProduct(null);
                     setPaymentMethod('dinheiro');
                   }}
-                  className="w-full bg-slate-300 hover:bg-slate-400 text-slate-800 rounded-xl md:rounded-2xl p-2.5 md:p-3 lg:p-4 text-base md:text-lg lg:text-xl xl:text-2xl font-semibold transition"
+                  className="w-full bg-slate-300 hover:bg-slate-400 active:bg-slate-500 text-slate-800 rounded-lg sm:rounded-xl md:rounded-2xl p-2 sm:p-2.5 md:p-3 lg:p-4 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold transition transform active:scale-95"
                 >
                   Cancelar
                 </button>
