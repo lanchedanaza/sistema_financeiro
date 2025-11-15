@@ -130,11 +130,12 @@ export default function ClientsView({ onBack }: ClientsViewProps) {
             </h1>
 
             <div className="space-y-3 md:space-y-4">
-              {clients.map(client => (
+              {clients.map((client, index) => (
                 <button
                   key={client.id}
                   onClick={() => handleClientClick(client)}
-                  className="w-full bg-white hover:bg-slate-50 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl border-4 border-slate-200 transform transition hover:scale-105 active:scale-95 flex items-center gap-4 md:gap-6"
+                  className="w-full bg-white hover:bg-slate-50 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl border-4 border-slate-200 transform transition-all duration-300 ease-out hover:scale-105 active:scale-95 flex items-center gap-4 md:gap-6 card-hover animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   <div className="bg-blue-100 rounded-full p-3 md:p-4">
                     <Users className="w-8 h-8 md:w-12 md:h-12 text-blue-600" strokeWidth={2.5} />
@@ -183,10 +184,11 @@ export default function ClientsView({ onBack }: ClientsViewProps) {
 
             <h2 className="text-2xl md:text-3xl font-bold text-slate-700 mb-3 md:mb-4">Histórico</h2>
             <div className="space-y-3">
-              {debts.map(debt => (
+              {debts.map((debt, index) => (
                 <div
                   key={debt.id}
-                  className="bg-white rounded-2xl p-5 shadow-lg border-2 border-slate-200"
+                  className="bg-white rounded-2xl p-5 shadow-lg border-2 border-slate-200 card-hover animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   <div className="flex justify-between items-start mb-2">
                     <p className="text-xl font-semibold text-slate-700">{debt.description}</p>
@@ -204,8 +206,8 @@ export default function ClientsView({ onBack }: ClientsViewProps) {
         )}
 
         {showAddDebtModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50">
-            <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50 animate-modal-backdrop">
+            <div className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto animate-modal-content">
               <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4 md:mb-6 text-center">
                 Anotar Débito
               </h2>
