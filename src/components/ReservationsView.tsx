@@ -344,11 +344,12 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold">Nova Reserva</p>
         </button>
 
-        <div className="space-y-4">
-          {reservations.map(reservation => (
+        <div className="space-y-2 sm:space-y-3 md:space-y-4">
+          {reservations.map((reservation, index) => (
             <div
               key={reservation.id}
-              className={`rounded-3xl p-6 shadow-xl border-4 ${getStatusColor(reservation.status)}`}
+              className={`rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 shadow-xl border-4 ${getStatusColor(reservation.status)} card-hover animate-fade-in-up`}
+              style={{ animationDelay: `${index * 0.05}s` }}
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
@@ -406,7 +407,7 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
 
         {showModal && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50 animate-modal-backdrop"
             onClick={() => {
               setShowModal(false);
               setShowProductDropdown(false);
@@ -415,7 +416,7 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
             }}
           >
             <div 
-              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-8 max-w-md w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto relative"
+              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-8 max-w-md w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto relative animate-modal-content"
               onClick={(e) => e.stopPropagation()}
             >
               <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-800 mb-3 sm:mb-4 md:mb-6 text-center">
@@ -570,11 +571,11 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
         {/* Modal do Calendário */}
         {showCalendar && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-[60]"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-[60] animate-modal-backdrop"
             onClick={() => setShowCalendar(false)}
           >
             <div 
-              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-2 sm:p-3 md:p-4 lg:p-8 max-w-2xl w-full shadow-2xl mx-2 max-h-[95vh] overflow-y-auto"
+              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-2 sm:p-3 md:p-4 lg:p-8 max-w-2xl w-full shadow-2xl mx-2 max-h-[95vh] overflow-y-auto animate-modal-content"
               onClick={(e) => e.stopPropagation()}
             >
               {renderCalendar()}
