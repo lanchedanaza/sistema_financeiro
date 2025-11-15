@@ -1,10 +1,19 @@
-import { DollarSign, FileText, Calendar, TrendingUp, History, LogOut } from 'lucide-react';
+import { DollarSign, FileText, Calendar, TrendingUp, History, LogOut, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { Sale } from '../types';
 
 interface DashboardProps {
   onNavigate: (view: string) => void;
   onLogout: () => void;
+}
+
+interface SaleSummary {
+  product_name: string;
+  total_quantity: number;
+  unit_price: number;
+  total_amount: number;
+  payment_method?: string;
 }
 
 export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
@@ -12,6 +21,8 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
   const [debtToday, setDebtToday] = useState(0);
   const [reservationsToday, setReservationsToday] = useState(0);
   const [totalSoldToday, setTotalSoldToday] = useState(0);
+  const [showTotalSoldModal, setShowTotalSoldModal] = useState(false);
+  const [salesSummary, setSalesSummary] = useState<SaleSummary[]>([]);
 
   useEffect(() => {
     loadDashboardData();
@@ -25,7 +36,8 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
     const { data: sales } = await supabase
       .from('sales')
       .select('*')
-      .gte('created_at', todayISO);
+      .gte('created_at', todayISO)
+      .order('created_at', { ascending: false });
 
     if (sales) {
       const received = sales
@@ -41,6 +53,28 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
       setReceivedToday(received);
       setDebtToday(debt);
       setTotalSoldToday(total);
+
+      // Agrupar vendas por produto
+      const summaryMap = new Map<string, SaleSummary>();
+      
+      sales.forEach((sale: Sale) => {
+        const key = sale.product_name;
+        if (summaryMap.has(key)) {
+          const existing = summaryMap.get(key)!;
+          existing.total_quantity += sale.quantity;
+          existing.total_amount += Number(sale.total_price);
+        } else {
+          summaryMap.set(key, {
+            product_name: sale.product_name,
+            total_quantity: sale.quantity,
+            unit_price: Number(sale.unit_price),
+            total_amount: Number(sale.total_price),
+            payment_method: sale.payment_method,
+          });
+        }
+      });
+
+      setSalesSummary(Array.from(summaryMap.values()));
     }
 
     const tomorrow = new Date(today);
@@ -54,6 +88,11 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
       .eq('status', 'pending');
 
     setReservationsToday(reservations?.length || 0);
+  };
+
+  const handleTotalSoldClick = () => {
+    loadDashboardData();
+    setShowTotalSoldModal(true);
   };
 
   const userEmail = localStorage.getItem('user_email') || 'Usuário';
@@ -112,7 +151,7 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
           </button>
 
           <button
-            onClick={() => onNavigate('sales')}
+            onClick={handleTotalSoldClick}
             className="bg-slate-700 hover:bg-slate-800 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl transform transition hover:scale-105 active:scale-95"
           >
             <TrendingUp className="w-12 h-12 md:w-20 md:h-20 mx-auto mb-3 md:mb-4" strokeWidth={2.5} />
@@ -138,6 +177,95 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
           </button>
         </div>
       </div>
+
+      {/* Modal de Resumo de Vendas do Dia */}
+      {showTotalSoldModal && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50"
+          onClick={() => setShowTotalSoldModal(false)}
+        >
+          <div 
+            className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 max-w-2xl w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-3 sm:mb-4 md:mb-6">
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-800">
+                Resumo de Vendas - Hoje
+              </h2>
+              <button
+                onClick={() => setShowTotalSoldModal(false)}
+                className="text-slate-500 hover:text-slate-700 transition"
+              >
+                <X className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+              </button>
+            </div>
+
+            {salesSummary.length === 0 ? (
+              <div className="text-center py-8 md:py-12">
+                <p className="text-base sm:text-lg md:text-xl text-slate-500">
+                  Nenhuma venda realizada hoje
+                </p>
+              </div>
+            ) : (
+              <>
+                <div className="space-y-2 sm:space-y-3 md:space-y-4 mb-4 sm:mb-5 md:mb-6 max-h-[50vh] overflow-y-auto">
+                  {salesSummary.map((item, index) => (
+                    <div
+                      key={index}
+                      className="bg-slate-50 rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 border-2 border-slate-200"
+                    >
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-slate-800 mb-1 truncate">
+                            {item.product_name}
+                          </h3>
+                          <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm md:text-base text-slate-600">
+                            <span>Qtd: {item.total_quantity}</span>
+                            <span>•</span>
+                            <span>Unit: R$ {item.unit_price.toFixed(2)}</span>
+                          </div>
+                        </div>
+                        <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-green-600 flex-shrink-0 ml-2">
+                          R$ {item.total_amount.toFixed(2)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="border-t-4 border-slate-300 pt-3 sm:pt-4 md:pt-5">
+                  <div className="flex justify-between items-center">
+                    <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-800">
+                      Total do Dia:
+                    </span>
+                    <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-green-600">
+                      R$ {totalSoldToday.toFixed(2)}
+                    </span>
+                  </div>
+                  
+                  <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-2 sm:gap-3 md:gap-4 text-sm sm:text-base md:text-lg">
+                    <div className="bg-green-50 rounded-lg sm:rounded-xl p-2 sm:p-3">
+                      <p className="text-slate-600 mb-1">Recebido:</p>
+                      <p className="text-green-600 font-bold">R$ {receivedToday.toFixed(2)}</p>
+                    </div>
+                    <div className="bg-yellow-50 rounded-lg sm:rounded-xl p-2 sm:p-3">
+                      <p className="text-slate-600 mb-1">Fiado:</p>
+                      <p className="text-yellow-600 font-bold">R$ {debtToday.toFixed(2)}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => setShowTotalSoldModal(false)}
+                  className="w-full mt-4 sm:mt-5 md:mt-6 bg-slate-300 hover:bg-slate-400 active:bg-slate-500 text-slate-800 rounded-lg sm:rounded-xl md:rounded-2xl p-2.5 sm:p-3 md:p-4 text-sm sm:text-base md:text-lg lg:text-xl font-semibold transition transform active:scale-95"
+                >
+                  Fechar
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
