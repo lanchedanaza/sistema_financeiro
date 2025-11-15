@@ -44,18 +44,19 @@ export default function Login({ onLogin }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-md w-full">
-        <div className="text-center mb-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 flex items-center justify-center p-4 animate-fade-in">
+      <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-md w-full animate-scale-in">
+        <div className="text-center mb-8 animate-fade-in-down">
           <img 
             src="/logos/logo01.png" 
             alt="Vida Cantina" 
-            className="mx-auto max-w-48 h-auto mb-6 object-contain"
+            className="mx-auto max-w-48 h-auto mb-6 object-contain animate-fade-in-up"
+            style={{ animationDelay: '0.1s' }}
           />
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-2">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-800 mb-2 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             Vida Cantina
           </h1>
-          <p className="text-xl text-slate-600">
+          <p className="text-xl text-slate-600 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             Sistema de Gestão
           </p>
         </div>
@@ -103,7 +104,7 @@ export default function Login({ onLogin }: LoginProps) {
           </div>
 
           {error && (
-            <div className="bg-red-100 border-4 border-red-300 rounded-2xl p-4">
+            <div className="bg-red-100 border-4 border-red-300 rounded-2xl p-4 animate-fade-in-up animate-shake">
               <p className="text-red-700 font-semibold text-center">{error}</p>
             </div>
           )}
@@ -111,7 +112,8 @@ export default function Login({ onLogin }: LoginProps) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-slate-300 disabled:cursor-not-allowed text-white rounded-2xl p-5 text-2xl font-bold transition transform hover:scale-105 active:scale-95 shadow-lg"
+            className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-slate-300 disabled:cursor-not-allowed text-white rounded-2xl p-5 text-2xl font-bold transition-all duration-300 ease-out transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-blue-500/50 animate-fade-in-up"
+            style={{ animationDelay: '0.4s' }}
           >
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
