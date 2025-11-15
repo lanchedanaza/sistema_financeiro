@@ -238,7 +238,7 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
               <button
                 key={index}
                 onClick={() => handleDateSelect(day)}
-                className={`h-10 md:h-16 rounded-xl md:rounded-2xl text-base md:text-2xl font-bold transition transform hover:scale-110 ${
+                className={`h-8 sm:h-9 md:h-10 lg:h-12 xl:h-16 rounded-lg sm:rounded-xl md:rounded-2xl text-xs sm:text-sm md:text-base lg:text-lg xl:text-2xl font-bold transition transform active:scale-95 ${
                   isSelected
                     ? 'bg-blue-500 text-white shadow-lg scale-105'
                     : isToday
@@ -312,35 +312,36 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-2 sm:p-3 md:p-4 lg:p-8 max-h-screen overflow-y-auto">
       <div className="max-w-4xl mx-auto">
-        <div className="flex gap-3 mb-6">
+        <div className="flex gap-2 mb-3 sm:mb-4 md:mb-6">
           <button
             onClick={onBack}
-            className="flex-1 bg-white p-4 rounded-2xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-3"
+            className="flex-1 bg-white p-2 sm:p-2.5 md:p-4 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2"
           >
-            <ArrowLeft className="w-8 h-8 text-slate-700" />
-            <span className="text-2xl font-semibold text-slate-700">Voltar</span>
+            <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-slate-700" />
+            <span className="text-sm sm:text-base md:text-xl lg:text-2xl font-semibold text-slate-700">Voltar</span>
           </button>
           <button
             onClick={onBack}
-            className="flex-1 bg-blue-500 hover:bg-blue-600 p-4 rounded-2xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-3"
+            className="flex-1 bg-blue-500 hover:bg-blue-600 p-2 sm:p-2.5 md:p-4 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2"
           >
-            <Home className="w-8 h-8 text-white" />
-            <span className="text-2xl font-semibold text-white">Voltar ao Início</span>
+            <Home className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-white" />
+            <span className="text-xs sm:text-sm md:text-lg lg:text-2xl font-semibold text-white hidden sm:inline">Voltar ao Início</span>
+            <span className="text-xs sm:text-sm md:text-lg lg:text-2xl font-semibold text-white sm:hidden">Início</span>
           </button>
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-800 mb-6 md:mb-8 text-center">
+        <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-slate-800 mb-3 sm:mb-4 md:mb-6 lg:mb-8 text-center">
           Reservas
         </h1>
 
         <button
           onClick={() => setShowModal(true)}
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 mb-6 md:mb-8 shadow-2xl transform transition hover:scale-105 active:scale-95"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 mb-3 sm:mb-4 md:mb-6 lg:mb-8 shadow-2xl transform transition hover:scale-105 active:scale-95"
         >
-          <Plus className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-2 md:mb-3" strokeWidth={3} />
-          <p className="text-2xl md:text-3xl font-bold">Nova Reserva</p>
+          <Plus className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 mx-auto mb-1 sm:mb-2 md:mb-3" strokeWidth={3} />
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold">Nova Reserva</p>
         </button>
 
         <div className="space-y-4">
@@ -405,7 +406,7 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
 
         {showModal && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50"
             onClick={() => {
               setShowModal(false);
               setShowProductDropdown(false);
@@ -414,15 +415,15 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
             }}
           >
             <div 
-              className="bg-white rounded-2xl md:rounded-3xl p-5 md:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto relative"
+              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-8 max-w-md w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto relative"
               onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-4 md:mb-6 text-center">
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-slate-800 mb-3 sm:mb-4 md:mb-6 text-center">
                 Nova Reserva
               </h2>
 
-              <div className="mb-4 md:mb-5 relative">
-                <label className="block text-xl md:text-2xl font-semibold text-slate-700 mb-2 md:mb-3">
+              <div className="mb-3 sm:mb-4 md:mb-5 relative">
+                <label className="block text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-slate-700 mb-1.5 sm:mb-2 md:mb-3">
                   Nome do Cliente
                 </label>
                 <div className="relative">
@@ -437,22 +438,22 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
                       }
                     }}
                     onFocus={() => setShowClientDropdown(true)}
-                    className="w-full text-lg md:text-2xl p-3 md:p-4 border-4 border-slate-300 rounded-2xl focus:border-blue-500 focus:outline-none pr-10 md:pr-12"
+                    className="w-full text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl p-2.5 sm:p-3 md:p-4 border-4 border-slate-300 rounded-lg sm:rounded-xl md:rounded-2xl focus:border-blue-500 focus:outline-none pr-8 sm:pr-10 md:pr-12"
                     placeholder="Digite para buscar cliente..."
                   />
-                  <ChevronDown className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 md:w-8 md:h-8 text-slate-400 pointer-events-none" />
+                  <ChevronDown className="absolute right-2 sm:right-3 md:right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-slate-400 pointer-events-none" />
                   
                   {showClientDropdown && clientSearch && filteredClients.length > 0 && (
-                    <div className="absolute z-10 w-full mt-2 bg-white border-4 border-slate-300 rounded-2xl shadow-2xl max-h-60 overflow-y-auto">
+                    <div className="absolute z-10 w-full mt-1 sm:mt-2 bg-white border-4 border-slate-300 rounded-lg sm:rounded-xl md:rounded-2xl shadow-2xl max-h-48 sm:max-h-60 overflow-y-auto">
                       {filteredClients.map(client => (
                         <button
                           key={client.id}
                           type="button"
                           onClick={() => handleClientSelect(client)}
-                          className="w-full text-left p-4 hover:bg-blue-50 border-b-2 border-slate-100 last:border-b-0 transition"
+                          className="w-full text-left p-2 sm:p-3 md:p-4 hover:bg-blue-50 border-b-2 border-slate-100 last:border-b-0 transition"
                         >
-                          <p className="text-xl font-bold text-slate-800">{client.name}</p>
-                          <p className="text-lg text-red-600 font-semibold">
+                          <p className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-slate-800 truncate">{client.name}</p>
+                          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-red-600 font-semibold">
                             Deve: R$ {Number(client.total_debt).toFixed(2)}
                           </p>
                         </button>
@@ -461,14 +462,14 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
                   )}
                 </div>
                 {clientSearch && !filteredClients.find(c => c.name.toLowerCase() === clientSearch.toLowerCase()) && (
-                  <p className="text-sm text-slate-500 mt-2">
+                  <p className="text-xs sm:text-sm text-slate-500 mt-1 sm:mt-2">
                     Cliente não encontrado. Será criado um novo cliente ao salvar.
                   </p>
                 )}
               </div>
 
-              <div className="mb-4 md:mb-5 relative">
-                <label className="block text-xl md:text-2xl font-semibold text-slate-700 mb-2 md:mb-3">
+              <div className="mb-3 sm:mb-4 md:mb-5 relative">
+                <label className="block text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-slate-700 mb-1.5 sm:mb-2 md:mb-3">
                   Produto
                 </label>
                 <div className="relative">
@@ -484,22 +485,22 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
                       }
                     }}
                     onFocus={() => setShowProductDropdown(true)}
-                    className="w-full text-lg md:text-2xl p-3 md:p-4 border-4 border-slate-300 rounded-2xl focus:border-blue-500 focus:outline-none pr-10 md:pr-12"
+                    className="w-full text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl p-2.5 sm:p-3 md:p-4 border-4 border-slate-300 rounded-lg sm:rounded-xl md:rounded-2xl focus:border-blue-500 focus:outline-none pr-8 sm:pr-10 md:pr-12"
                     placeholder="Digite para buscar produto..."
                   />
-                  <ChevronDown className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2 w-6 h-6 md:w-8 md:h-8 text-slate-400 pointer-events-none" />
+                  <ChevronDown className="absolute right-2 sm:right-3 md:right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-slate-400 pointer-events-none" />
                   
                   {showProductDropdown && productSearch && filteredProducts.length > 0 && (
-                    <div className="absolute z-10 w-full mt-2 bg-white border-4 border-slate-300 rounded-2xl shadow-2xl max-h-60 overflow-y-auto">
+                    <div className="absolute z-10 w-full mt-1 sm:mt-2 bg-white border-4 border-slate-300 rounded-lg sm:rounded-xl md:rounded-2xl shadow-2xl max-h-48 sm:max-h-60 overflow-y-auto">
                       {filteredProducts.map(product => (
                         <button
                           key={product.id}
                           type="button"
                           onClick={() => handleProductSelect(product)}
-                          className="w-full text-left p-4 hover:bg-blue-50 border-b-2 border-slate-100 last:border-b-0 transition"
+                          className="w-full text-left p-2 sm:p-3 md:p-4 hover:bg-blue-50 border-b-2 border-slate-100 last:border-b-0 transition"
                         >
-                          <p className="text-xl font-bold text-slate-800">{product.name}</p>
-                          <p className="text-lg text-green-600 font-semibold">
+                          <p className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-slate-800 truncate">{product.name}</p>
+                          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-green-600 font-semibold">
                             R$ {Number(product.price).toFixed(2)}
                           </p>
                         </button>
@@ -509,8 +510,8 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
                 </div>
               </div>
 
-              <div className="mb-4 md:mb-5">
-                <label className="block text-xl md:text-2xl font-semibold text-slate-700 mb-2 md:mb-3">
+              <div className="mb-3 sm:mb-4 md:mb-5">
+                <label className="block text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-slate-700 mb-1.5 sm:mb-2 md:mb-3">
                   Valor
                 </label>
                 <input
@@ -518,13 +519,13 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
                   step="0.01"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full text-lg md:text-2xl p-3 md:p-4 border-4 border-slate-300 rounded-2xl focus:border-blue-500 focus:outline-none"
+                  className="w-full text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl p-2.5 sm:p-3 md:p-4 border-4 border-slate-300 rounded-lg sm:rounded-xl md:rounded-2xl focus:border-blue-500 focus:outline-none"
                   placeholder="0.00"
                 />
               </div>
 
-              <div className="mb-4 md:mb-5">
-                <label className="block text-xl md:text-2xl font-semibold text-slate-700 mb-2 md:mb-3">
+              <div className="mb-3 sm:mb-4 md:mb-5">
+                <label className="block text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold text-slate-700 mb-1.5 sm:mb-2 md:mb-3">
                   Data
                 </label>
                 <input
@@ -540,24 +541,24 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
                     }
                   }}
                   placeholder="Clique para selecionar a data"
-                  className="w-full text-lg md:text-2xl p-3 md:p-4 border-4 border-slate-300 rounded-2xl focus:border-blue-500 focus:outline-none cursor-pointer pr-10 md:pr-12"
+                  className="w-full text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl p-2.5 sm:p-3 md:p-4 border-4 border-slate-300 rounded-lg sm:rounded-xl md:rounded-2xl focus:border-blue-500 focus:outline-none cursor-pointer pr-8 sm:pr-10 md:pr-12"
                 />
               </div>
 
 
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4">
                 <button
                   onClick={() => {
                     setShowModal(false);
                     setShowProductDropdown(false);
                   }}
-                  className="flex-1 bg-slate-300 hover:bg-slate-400 text-slate-800 rounded-2xl p-4 md:p-5 text-lg md:text-2xl font-semibold transition"
+                  className="flex-1 bg-slate-300 hover:bg-slate-400 active:bg-slate-500 text-slate-800 rounded-lg sm:rounded-xl md:rounded-2xl p-2.5 sm:p-3 md:p-4 lg:p-5 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold transition transform active:scale-95"
                 >
                   Cancelar
                 </button>
                 <button
                   onClick={handleCreateReservation}
-                  className="flex-1 bg-blue-500 hover:bg-blue-600 text-white rounded-2xl p-4 md:p-5 text-lg md:text-2xl font-semibold transition"
+                  className="flex-1 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white rounded-lg sm:rounded-xl md:rounded-2xl p-2.5 sm:p-3 md:p-4 lg:p-5 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold transition transform active:scale-95"
                 >
                   Salvar
                 </button>
@@ -569,11 +570,11 @@ export default function ReservationsView({ onBack }: ReservationsViewProps) {
         {/* Modal do Calendário */}
         {showCalendar && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-[60]"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-[60]"
             onClick={() => setShowCalendar(false)}
           >
             <div 
-              className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-8 max-w-2xl w-full shadow-2xl mx-2"
+              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-2 sm:p-3 md:p-4 lg:p-8 max-w-2xl w-full shadow-2xl mx-2 max-h-[95vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               {renderCalendar()}
