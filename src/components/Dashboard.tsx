@@ -125,36 +125,40 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
           <button
             onClick={() => onNavigate('sales')}
-            className="bg-green-500 hover:bg-green-600 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl transform transition hover:scale-105 active:scale-95"
+            className="bg-green-500 hover:bg-green-600 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl transform transition-all duration-300 ease-out hover:scale-105 active:scale-95 hover:shadow-green-500/50 animate-fade-in-up"
+            style={{ animationDelay: '0.1s' }}
           >
-            <DollarSign className="w-12 h-12 md:w-20 md:h-20 mx-auto mb-3 md:mb-4" strokeWidth={2.5} />
+            <DollarSign className="w-12 h-12 md:w-20 md:h-20 mx-auto mb-3 md:mb-4 transition-transform duration-300 hover:scale-110" strokeWidth={2.5} />
             <p className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">R$ {receivedToday.toFixed(2)}</p>
             <p className="text-lg md:text-xl font-semibold">Recebido Hoje</p>
           </button>
 
           <button
             onClick={() => onNavigate('debtSale')}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl transform transition hover:scale-105 active:scale-95"
+            className="bg-yellow-500 hover:bg-yellow-600 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl transform transition-all duration-300 ease-out hover:scale-105 active:scale-95 hover:shadow-yellow-500/50 animate-fade-in-up"
+            style={{ animationDelay: '0.2s' }}
           >
-            <FileText className="w-12 h-12 md:w-20 md:h-20 mx-auto mb-3 md:mb-4" strokeWidth={2.5} />
+            <FileText className="w-12 h-12 md:w-20 md:h-20 mx-auto mb-3 md:mb-4 transition-transform duration-300 hover:scale-110" strokeWidth={2.5} />
             <p className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">R$ {debtToday.toFixed(2)}</p>
             <p className="text-lg md:text-xl font-semibold">Fiado Hoje</p>
           </button>
 
           <button
             onClick={() => onNavigate('reservations')}
-            className="bg-blue-500 hover:bg-blue-600 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl transform transition hover:scale-105 active:scale-95"
+            className="bg-blue-500 hover:bg-blue-600 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl transform transition-all duration-300 ease-out hover:scale-105 active:scale-95 hover:shadow-blue-500/50 animate-fade-in-up"
+            style={{ animationDelay: '0.3s' }}
           >
-            <Calendar className="w-12 h-12 md:w-20 md:h-20 mx-auto mb-3 md:mb-4" strokeWidth={2.5} />
+            <Calendar className="w-12 h-12 md:w-20 md:h-20 mx-auto mb-3 md:mb-4 transition-transform duration-300 hover:scale-110" strokeWidth={2.5} />
             <p className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">{reservationsToday}</p>
             <p className="text-lg md:text-xl font-semibold">Reservas do Dia</p>
           </button>
 
           <button
             onClick={handleTotalSoldClick}
-            className="bg-slate-700 hover:bg-slate-800 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl transform transition hover:scale-105 active:scale-95"
+            className="bg-slate-700 hover:bg-slate-800 text-white rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl transform transition-all duration-300 ease-out hover:scale-105 active:scale-95 hover:shadow-slate-500/50 animate-fade-in-up"
+            style={{ animationDelay: '0.4s' }}
           >
-            <TrendingUp className="w-12 h-12 md:w-20 md:h-20 mx-auto mb-3 md:mb-4" strokeWidth={2.5} />
+            <TrendingUp className="w-12 h-12 md:w-20 md:h-20 mx-auto mb-3 md:mb-4 transition-transform duration-300 hover:scale-110" strokeWidth={2.5} />
             <p className="text-2xl md:text-3xl font-bold mb-1 md:mb-2">R$ {totalSoldToday.toFixed(2)}</p>
             <p className="text-lg md:text-xl font-semibold">Total Vendido</p>
           </button>
@@ -163,16 +167,18 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           <button
             onClick={() => onNavigate('products')}
-            className="bg-slate-600 hover:bg-slate-700 text-white rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-xl transform transition hover:scale-105 active:scale-95 text-xl md:text-2xl font-semibold"
+            className="bg-slate-600 hover:bg-slate-700 text-white rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-xl transform transition-all duration-300 ease-out hover:scale-105 active:scale-95 hover:shadow-slate-500/50 text-xl md:text-2xl font-semibold animate-fade-in-up"
+            style={{ animationDelay: '0.5s' }}
           >
             Gerenciar Produtos
           </button>
 
           <button
             onClick={() => onNavigate('history')}
-            className="bg-purple-500 hover:bg-purple-600 text-white rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-xl transform transition hover:scale-105 active:scale-95 flex items-center justify-center gap-3 md:gap-4"
+            className="bg-purple-500 hover:bg-purple-600 text-white rounded-2xl md:rounded-3xl p-5 md:p-6 shadow-xl transform transition-all duration-300 ease-out hover:scale-105 active:scale-95 hover:shadow-purple-500/50 flex items-center justify-center gap-3 md:gap-4 animate-fade-in-up"
+            style={{ animationDelay: '0.6s' }}
           >
-            <History className="w-8 h-8 md:w-10 md:h-10" strokeWidth={2.5} />
+            <History className="w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 hover:scale-110" strokeWidth={2.5} />
             <span className="text-xl md:text-2xl font-semibold">Histórico Completo</span>
           </button>
         </div>
@@ -181,11 +187,11 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
       {/* Modal de Resumo de Vendas do Dia */}
       {showTotalSoldModal && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-50 animate-modal-backdrop"
           onClick={() => setShowTotalSoldModal(false)}
         >
           <div 
-            className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 max-w-2xl w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto"
+            className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 max-w-2xl w-full mx-2 shadow-2xl max-h-[95vh] overflow-y-auto animate-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-3 sm:mb-4 md:mb-6">
@@ -212,7 +218,8 @@ export default function Dashboard({ onNavigate, onLogout }: DashboardProps) {
                   {salesSummary.map((item, index) => (
                     <div
                       key={index}
-                      className="bg-slate-50 rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 border-2 border-slate-200"
+                      className="bg-slate-50 rounded-lg sm:rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 border-2 border-slate-200 animate-fade-in-up card-hover"
+                      style={{ animationDelay: `${index * 0.05}s` }}
                     >
                       <div className="flex justify-between items-start mb-2">
                         <div className="flex-1 min-w-0">
