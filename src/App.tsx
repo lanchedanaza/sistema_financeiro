@@ -41,8 +41,22 @@ function App() {
 
   const checkSession = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
+      // Verificar se as variáveis de ambiente estão configuradas
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      
+      if (!supabaseUrl || !supabaseKey) {
+        console.error('❌ Variáveis de ambiente do Supabase não configuradas!');
+        setIsLoading(false);
+        return;
+      }
+
+      const { data: { session }, error } = await supabase.auth.getSession();
+      
+      if (error) {
+        console.error('Error getting session:', error);
+        setIsAuthenticated(false);
+      } else if (session?.user) {
         setIsAuthenticated(true);
         localStorage.setItem('user_email', session.user.email || '');
       } else {
@@ -75,8 +89,35 @@ function App() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 flex items-center justify-center">
-        <div className="text-white text-2xl font-bold">Carregando...</div>
+      <div className="min-h-screen bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 flex items-center justify-center animate-fade-in">
+        <div className="text-white text-2xl font-bold animate-pulse-slow">Carregando...</div>
+      </div>
+    );
+  }
+
+  // Verificar se as variáveis de ambiente estão configuradas
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  
+  if (!supabaseUrl || !supabaseKey) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-500 via-red-600 to-red-700 flex items-center justify-center p-4">
+        <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full text-center">
+          <h1 className="text-3xl font-bold text-red-600 mb-4">⚠️ Erro de Configuração</h1>
+          <p className="text-lg text-slate-700 mb-4">
+            As variáveis de ambiente do Supabase não estão configuradas.
+          </p>
+          <div className="bg-slate-100 rounded-2xl p-4 text-left mb-4">
+            <p className="text-sm font-semibold mb-2">Configure na Vercel:</p>
+            <ul className="text-sm text-slate-600 space-y-1">
+              <li>• VITE_SUPABASE_URL</li>
+              <li>• VITE_SUPABASE_ANON_KEY</li>
+            </ul>
+          </div>
+          <p className="text-sm text-slate-500">
+            Consulte o arquivo CONFIGURAR_VERCEL.md para mais detalhes.
+          </p>
+        </div>
       </div>
     );
   }
@@ -88,19 +129,19 @@ function App() {
   const renderView = () => {
     switch (currentView) {
       case 'products':
-        return <ProductManager onBack={() => setCurrentView('dashboard')} />;
+        return <div className="animate-fade-in-up"><ProductManager onBack={() => setCurrentView('dashboard')} /></div>;
       case 'sales':
-        return <SalesView onBack={() => setCurrentView('dashboard')} />;
+        return <div className="animate-fade-in-up"><SalesView onBack={() => setCurrentView('dashboard')} /></div>;
       case 'clients':
-        return <ClientsView onBack={() => setCurrentView('dashboard')} />;
+        return <div className="animate-fade-in-up"><ClientsView onBack={() => setCurrentView('dashboard')} /></div>;
       case 'reservations':
-        return <ReservationsView onBack={() => setCurrentView('dashboard')} />;
+        return <div className="animate-fade-in-up"><ReservationsView onBack={() => setCurrentView('dashboard')} /></div>;
       case 'history':
-        return <HistoryView onBack={() => setCurrentView('dashboard')} />;
+        return <div className="animate-fade-in-up"><HistoryView onBack={() => setCurrentView('dashboard')} /></div>;
       case 'debtSale':
-        return <DebtSaleView onBack={() => setCurrentView('dashboard')} />;
+        return <div className="animate-fade-in-up"><DebtSaleView onBack={() => setCurrentView('dashboard')} /></div>;
           default:
-            return <Dashboard onNavigate={(view) => setCurrentView(view as View)} onLogout={handleLogout} />;
+            return <div className="animate-fade-in"><Dashboard onNavigate={(view) => setCurrentView(view as View)} onLogout={handleLogout} /></div>;
     }
   };
 
