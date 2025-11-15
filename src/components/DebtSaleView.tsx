@@ -579,8 +579,8 @@ export default function DebtSaleView({ onBack }: DebtSaleViewProps) {
 
         {/* Modal de Seleção de Cliente */}
         {showClientModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50">
-            <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50 animate-modal-backdrop">
+            <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto animate-modal-content">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-800 mb-4 md:mb-6 text-center">
                 Selecionar Cliente
               </h2>
@@ -633,8 +633,8 @@ export default function DebtSaleView({ onBack }: DebtSaleViewProps) {
 
         {/* Modal de Cadastro de Produto */}
         {showProductModal && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50">
-            <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-3 md:p-4 z-50 animate-modal-backdrop">
+            <div className="bg-white rounded-2xl md:rounded-3xl p-4 md:p-6 lg:p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto animate-modal-content">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-800 mb-4 md:mb-6 text-center">
                 Cadastrar Novo Produto
               </h2>
