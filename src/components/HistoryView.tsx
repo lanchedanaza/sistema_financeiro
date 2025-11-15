@@ -722,10 +722,11 @@ export default function HistoryView({ onBack }: HistoryViewProps) {
           </div>
         ) : (
           <div className="space-y-2 sm:space-y-3 md:space-y-4">
-            {history.map((item) => (
+            {history.map((item, index) => (
               <div
                 key={`${item.type}-${item.id}`}
-                className={`rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-6 shadow-xl border-4 ${getTypeColor(item.type)}`}
+                className={`rounded-xl sm:rounded-2xl md:rounded-3xl p-3 sm:p-4 md:p-5 lg:p-6 shadow-xl border-4 ${getTypeColor(item.type)} card-hover animate-fade-in-up`}
+                style={{ animationDelay: `${index * 0.03}s` }}
               >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 sm:gap-3 md:gap-4">
                 <div className="flex-1 min-w-0">
@@ -763,11 +764,11 @@ export default function HistoryView({ onBack }: HistoryViewProps) {
         {/* Modal do Calendário - Data Inicial */}
         {showStartCalendar && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-[60]"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-[60] animate-modal-backdrop"
             onClick={() => setShowStartCalendar(false)}
           >
             <div 
-              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-2 sm:p-3 md:p-4 lg:p-8 max-w-2xl w-full shadow-2xl mx-2 max-h-[95vh] overflow-y-auto"
+              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-2 sm:p-3 md:p-4 lg:p-8 max-w-2xl w-full shadow-2xl mx-2 max-h-[95vh] overflow-y-auto animate-modal-content"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 mb-3 sm:mb-4 text-center">
@@ -781,11 +782,11 @@ export default function HistoryView({ onBack }: HistoryViewProps) {
         {/* Modal do Calendário - Data Final */}
         {showEndCalendar && (
           <div 
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-[60]"
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-3 md:p-4 z-[60] animate-modal-backdrop"
             onClick={() => setShowEndCalendar(false)}
           >
             <div 
-              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-2 sm:p-3 md:p-4 lg:p-8 max-w-2xl w-full shadow-2xl mx-2 max-h-[95vh] overflow-y-auto"
+              className="bg-white rounded-xl sm:rounded-2xl md:rounded-3xl p-2 sm:p-3 md:p-4 lg:p-8 max-w-2xl w-full shadow-2xl mx-2 max-h-[95vh] overflow-y-auto animate-modal-content"
               onClick={(e) => e.stopPropagation()}
             >
               <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 mb-3 sm:mb-4 text-center">
